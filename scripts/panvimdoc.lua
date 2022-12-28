@@ -422,7 +422,11 @@ function CodeBlock(s, attr)
     for line in s:gmatch("([^\n]*)\n?") do
       table.insert(t, "    " .. escape(line))
     end
-    return ">\n" .. table.concat(t, "\n") .. "\n<\n"
+    local class = ""
+    if meta.treesitter then
+      class = attr.class
+    end
+    return ">" .. class .. "\n" .. table.concat(t, "\n") .. "\n<\n"
   end
 end
 
